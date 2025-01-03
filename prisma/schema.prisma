@@ -38,8 +38,6 @@ model bokdeokbang_blogs {
   updatedAt             DateTime?                @default(now()) @map("updated_at") @db.Timestamp(6)
   bokdeokbangCategories bokdeokbang_categories[]
   bokdeokbangPosts      bokdeokbang_posts[]
-  bokdeokbangUsers      bokdeokbang_users?       @relation(fields: [bokdeokbangUsersId], references: [id])
-  bokdeokbangUsersId    Int?                     @map("bokdeokbang_usersId")
 }
 
 model bokdeokbang_categories {
@@ -72,6 +70,5 @@ model bokdeokbang_users {
   password         String              @db.VarChar(255)
   createdAt        DateTime?           @default(now()) @map("created_at") @db.Timestamp(6)
   updatedAt        DateTime?           @default(now()) @map("updated_at") @db.Timestamp(6)
-  bokdeokbangBlogs bokdeokbang_blogs[]
   bokdeokbangPosts bokdeokbang_posts[]
 }
