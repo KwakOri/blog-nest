@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePostRequest } from 'src/posts/dto/create-post.dto';
+import { DeletePostRequest } from 'src/posts/dto/delete-post.dto';
 import { GetPostRequest } from 'src/posts/dto/get-post.dto';
 import { GetPostsRequest } from 'src/posts/dto/get-posts.dto';
 import { UpdatePostRequest } from 'src/posts/dto/update-post.dto';
@@ -32,6 +33,12 @@ export class PostsService {
   async updatePost(req: UpdatePostRequest) {
     return await this.prisma.bokdeokbang_posts.update(
       PostQueryBuilder.updatePost(req),
+    );
+  }
+
+  async deletePost(req: DeletePostRequest) {
+    return await this.prisma.bokdeokbang_posts.delete(
+      PostQueryBuilder.deletePost(req),
     );
   }
 }

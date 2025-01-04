@@ -1,5 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { CreatePostRequest } from 'src/posts/dto/create-post.dto';
+import { DeletePostRequest } from 'src/posts/dto/delete-post.dto';
 import { GetPostRequest } from 'src/posts/dto/get-post.dto';
 import { GetPostsQuery } from 'src/posts/dto/get-posts.dto';
 import { UpdatePostRequest } from 'src/posts/dto/update-post.dto';
@@ -75,7 +76,9 @@ export class PostQueryBuilder {
     };
   }
 
-  static deletePost(postId: number): Prisma.bokdeokbang_postsDeleteArgs {
+  static deletePost({
+    postId,
+  }: DeletePostRequest): Prisma.bokdeokbang_postsDeleteArgs {
     return {
       where: { id: postId },
     };
