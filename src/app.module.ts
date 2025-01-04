@@ -7,6 +7,7 @@ import { R2Service } from './r2/r2.service';
 import { R2Module } from './r2/r2.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { PostsModule } from './posts/posts.module';
+import { BlogsModule } from './blogs/blogs.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { PostsModule } from './posts/posts.module';
     R2Module,
     PrismaModule,
     PostsModule,
+    BlogsModule,
   ],
   controllers: [AppController],
   providers: [AppService, R2Service],

@@ -26,7 +26,8 @@ export class PostQueryBuilder {
         blogId,
         ...(categoryId && { categoryId }),
       },
-      ...(cursor && limit && { cursor: { id: cursor }, take: limit }),
+      ...(cursor && { cursor: { id: cursor }, skip: 1 }),
+      ...(limit && { take: limit }),
     };
   }
 

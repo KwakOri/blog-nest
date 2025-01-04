@@ -18,7 +18,7 @@ export class R2Controller {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
-    const { originalname, buffer } = file;
+    const { buffer } = file;
     const mimeType = file.mimetype;
     const publicUrl = await this.r2Service.uploadFile(
       'default',
@@ -29,10 +29,10 @@ export class R2Controller {
     // return { message: 'request success' };
   }
 
-  @Get('download/:key')
-  async downloadFile(@Param('key') key: string, @Res() res: Response) {
-    const file = await this.r2Service.downloadFile(key);
-    res.setHeader('Content-Disposition', `attachment; filename="${key}"`);
+  @Get('download/:fileId')
+  async downloadFile(@Param('fileId') fileId: string, @Res() res: Response) {
+    const file = await this.r2Service.downloadFile(fileId);
+    res.setHeader('Content-Disposition', `attachment; filename="${fileId}"`);
     res.send(file);
   }
 }
