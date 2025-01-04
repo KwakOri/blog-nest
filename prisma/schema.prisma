@@ -30,45 +30,45 @@ model apikeyper_users {
 }
 
 model bokdeokbang_blogs {
-  id                    Int                      @id @default(autoincrement())
-  name                  String                   @db.VarChar(255)
-  subdomain             String                   @unique @db.VarChar(255)
-  ownerId               Int?                     @map("owner_id")
-  createdAt             DateTime?                @default(now()) @map("created_at") @db.Timestamp(6)
-  updatedAt             DateTime?                @default(now()) @map("updated_at") @db.Timestamp(6)
-  bokdeokbangCategories bokdeokbang_categories[]
-  bokdeokbangPosts      bokdeokbang_posts[]
+  id         Int                      @id @default(autoincrement())
+  name       String                   @db.VarChar(255)
+  subdomain  String                   @unique @db.VarChar(255)
+  ownerId    Int?                     @map("owner_id")
+  createdAt  DateTime?                @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt  DateTime?                @default(now()) @map("updated_at") @db.Timestamp(6)
+  categories bokdeokbang_categories[]
+  posts      bokdeokbang_posts[]
 }
 
 model bokdeokbang_categories {
-  id               Int                 @id @default(autoincrement())
-  blogId           Int?                @map("blog_id")
-  name             String              @db.VarChar(255)
-  createdAt        DateTime?           @default(now()) @map("created_at") @db.Timestamp(6)
-  updatedAt        DateTime?           @default(now()) @map("updated_at") @db.Timestamp(6)
-  bokdeokbangBlogs bokdeokbang_blogs?  @relation(fields: [blogId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  bokdeokbangPosts bokdeokbang_posts[]
+  id        Int                 @id @default(autoincrement())
+  blogId    Int?                @map("blog_id")
+  name      String              @db.VarChar(255)
+  createdAt DateTime?           @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime?           @default(now()) @map("updated_at") @db.Timestamp(6)
+  blogs     bokdeokbang_blogs?  @relation(fields: [blogId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  posts     bokdeokbang_posts[]
 }
 
 model bokdeokbang_posts {
-  id                    Int                     @id @default(autoincrement())
-  blogId                Int?                    @map("blog_id")
-  title                 String                  @db.VarChar(255)
-  content               String
-  authorId              Int?                    @map("author_id")
-  categoryId            Int?                    @map("category_id")
-  createdAt             DateTime?               @default(now()) @map("created_at") @db.Timestamp(6)
-  updatedAt             DateTime?               @default(now()) @map("updated_at") @db.Timestamp(6)
-  bokdeokbangUsers      bokdeokbang_users?      @relation(fields: [authorId], references: [id], onUpdate: NoAction)
-  bokdeokbangBlogs      bokdeokbang_blogs?      @relation(fields: [blogId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  bokdeokbangCategories bokdeokbang_categories? @relation(fields: [categoryId], references: [id], onUpdate: NoAction)
+  id         Int                     @id @default(autoincrement())
+  blogId     Int                     @map("blog_id")
+  title      String                  @db.VarChar(255)
+  content    String
+  authorId   Int?                    @map("author_id")
+  categoryId Int?                    @map("category_id")
+  createdAt  DateTime?               @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt  DateTime?               @default(now()) @map("updated_at") @db.Timestamp(6)
+  users      bokdeokbang_users?      @relation(fields: [authorId], references: [id], onUpdate: NoAction)
+  blogs      bokdeokbang_blogs       @relation(fields: [blogId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  categories bokdeokbang_categories? @relation(fields: [categoryId], references: [id], onUpdate: NoAction)
 }
 
 model bokdeokbang_users {
-  id               Int                 @id @default(autoincrement())
-  email            String              @unique @db.VarChar(255)
-  password         String              @db.VarChar(255)
-  createdAt        DateTime?           @default(now()) @map("created_at") @db.Timestamp(6)
-  updatedAt        DateTime?           @default(now()) @map("updated_at") @db.Timestamp(6)
-  bokdeokbangPosts bokdeokbang_posts[]
+  id        Int                 @id @default(autoincrement())
+  email     String              @unique @db.VarChar(255)
+  password  String              @db.VarChar(255)
+  createdAt DateTime?           @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime?           @default(now()) @map("updated_at") @db.Timestamp(6)
+  posts     bokdeokbang_posts[]
 }
