@@ -11,7 +11,7 @@ import { BlogsService } from 'src/blogs/blogs.service';
 import { CreateBlogBody } from 'src/blogs/dto/create-blog.dto';
 import { GetBlogParam } from 'src/blogs/dto/get-blog.dto';
 import { UpdateBlogBody } from 'src/blogs/dto/update-blog.dto';
-import { BlogIdParam } from 'src/dto/common.dto';
+import { BlogIdParam } from 'src/dto/blog.dto';
 
 @Controller('blogs')
 export class BlogsController {

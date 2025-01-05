@@ -1,7 +1,7 @@
 import { IntersectionType, PartialType } from '@nestjs/mapped-types';
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber } from 'class-validator';
-import { BlogIdQuery } from 'src/dto/common.dto';
+import { BlogIdQuery } from 'src/dto/blog.dto';
 
 import { CreatePostBody } from 'src/posts/dto/create-post.dto';
 

@@ -8,7 +8,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { BlogIdQuery } from 'src/dto/common.dto';
+import { BlogIdQuery } from 'src/dto/blog.dto';
 
 import { CreatePostBody } from 'src/posts/dto/create-post.dto';
 import { DeletePostParam } from 'src/posts/dto/delete-post.dto';

@@ -1,4 +1,4 @@
-import { BlogIdQuery } from 'src/dto/common.dto';
+import { BlogIdQuery } from 'src/dto/blog.dto';
 
 export class GetCategoriesQuery extends BlogIdQuery {}
 
