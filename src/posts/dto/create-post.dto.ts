@@ -1,7 +1,7 @@
 import { IntersectionType } from '@nestjs/mapped-types';
 import { Transform, Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { BlogIdQuery } from 'src/posts/dto/common.dto';
+import { BlogIdQuery } from 'src/dto/common.dto';
 
 export class CreatePostBody {
   @IsString()

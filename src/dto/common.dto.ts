@@ -8,3 +8,11 @@ export class BlogIdQuery {
   @IsNotEmpty()
   blogId: number;
 }
+
+export class BlogIdParam {
+  @Type(() => Number)
+  @Transform(({ value }) => Number(value))
+  @IsNumber()
+  @IsNotEmpty()
+  blogId: number;
+}

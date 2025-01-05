@@ -4,8 +4,7 @@ import { DeletePostRequest } from 'src/posts/dto/delete-post.dto';
 import { GetPostRequest } from 'src/posts/dto/get-post.dto';
 import { GetPostsRequest } from 'src/posts/dto/get-posts.dto';
 import { UpdatePostRequest } from 'src/posts/dto/update-post.dto';
-import { PostQueryBuilder } from 'src/posts/utils/postQueryBuilder';
-
+import { PostQueryBuilder } from 'src/posts/query/postQueryBuilder';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
