@@ -1,7 +1,7 @@
 import { Transform, Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber } from 'class-validator';
 
-export class getBlogParam {
+export class GetBlogParam {
   @Type(() => Number)
   @Transform(({ value }) => Number(value))
   @IsNumber()
@@ -9,4 +9,4 @@ export class getBlogParam {
   blogId: number;
 }
 
-export class getBlogRequest extends getBlogParam {}
+export class GetBlogRequest extends GetBlogParam {}

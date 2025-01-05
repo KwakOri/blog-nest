@@ -1,7 +1,15 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { BlogsService } from 'src/blogs/blogs.service';
 import { CreateBlogBody } from 'src/blogs/dto/create-blog.dto';
-import { getBlogParam } from 'src/blogs/dto/get-blog.dto';
+import { GetBlogParam } from 'src/blogs/dto/get-blog.dto';
 import { UpdateBlogBody } from 'src/blogs/dto/update-blog.dto';
 import { BlogIdParam } from 'src/dto/common.dto';
 
@@ -15,7 +23,7 @@ export class BlogsController {
   }
 
   @Get('/:blogId')
-  getBlog(@Param() param: getBlogParam) {
+  getBlog(@Param() param: GetBlogParam) {
     return this.BlogsService.getBlog(param);
   }
 
@@ -27,5 +35,10 @@ export class BlogsController {
   @Put('/:blogId')
   updateBlog(@Param() param: BlogIdParam, @Body() body: UpdateBlogBody) {
     return this.BlogsService.updateBlog({ ...param, ...body });
+  }
+
+  @Delete('/:blogId')
+  deleteBlog(@Param() param: BlogIdParam) {
+    return this.BlogsService.deleteBlog(param);
   }
 }

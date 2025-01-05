@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBlogRequest } from 'src/blogs/dto/create-blog.dto';
-import { getBlogRequest } from 'src/blogs/dto/get-blog.dto';
+import { DeleteBlogRequest } from 'src/blogs/dto/delete-blog.dto';
+import { GetBlogRequest } from 'src/blogs/dto/get-blog.dto';
 import { UpdateBlogRequest } from 'src/blogs/dto/update-blog.dto';
 import { BlogQueryBuilder } from 'src/blogs/query/blogQueryBuilder';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -13,7 +14,7 @@ export class BlogsService {
     return await this.prisma.bokdeokbang_blogs.findMany();
   }
 
-  async getBlog(req: getBlogRequest) {
+  async getBlog(req: GetBlogRequest) {
     return await this.prisma.bokdeokbang_blogs.findUnique(
       BlogQueryBuilder.getBlog(req),
     );
@@ -31,5 +32,9 @@ export class BlogsService {
     );
   }
 
-  async deleteBlog() {}
+  async deleteBlog(req: DeleteBlogRequest) {
+    return await this.prisma.bokdeokbang_blogs.delete(
+      BlogQueryBuilder.deleteBlog(req),
+    );
+  }
 }
