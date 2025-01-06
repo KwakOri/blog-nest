@@ -1,12 +1,12 @@
 import { Transform, Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber } from 'class-validator';
 
-export class GetBlogParam {
+export class DeleteCategoryParam {
   @Type(() => Number)
   @Transform(({ value }) => Number(value))
   @IsNumber()
   @IsNotEmpty()
-  blogId: number;
+  categoryId: number;
 }
 
-export class GetBlogRequest extends GetBlogParam {}
+export class DeleteCategoryRequest extends DeleteCategoryParam {}

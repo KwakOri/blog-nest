@@ -7,8 +7,10 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
-import { BlogIdQuery } from 'src/dto/common.dto';
+import { AccessTokenGuard } from 'src/auth/guards/jwt.guard';
+import { BlogIdQuery } from 'src/dto/blog.dto';
 
 import { CreatePostBody } from 'src/posts/dto/create-post.dto';
 import { DeletePostParam } from 'src/posts/dto/delete-post.dto';
@@ -27,16 +29,19 @@ export class PostsController {
   }
 
   @Get('/:postId')
+  @UseGuards(AccessTokenGuard)
   async getPost(@Query() query: BlogIdQuery, @Param() param: GetPostParam) {
     return await this.PostsService.getPost({ ...query, ...param });
   }
 
   @Post()
+  @UseGuards(AccessTokenGuard)
   async createPost(@Query() query: BlogIdQuery, @Body() body: CreatePostBody) {
     return await this.PostsService.createPost({ ...body, ...query });
   }
 
   @Put('/:postId')
+  @UseGuards(AccessTokenGuard)
   async updatePost(
     @Query() query: BlogIdQuery,
     @Param() param: UpdatePostParam,
@@ -46,6 +51,7 @@ export class PostsController {
   }
 
   @Delete('/postId')
+  @UseGuards(AccessTokenGuard)
   async deletePost(@Param() param: DeletePostParam) {
     this.PostsService.deletePost({ ...param });
   }

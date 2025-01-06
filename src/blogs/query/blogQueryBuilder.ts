@@ -1,6 +1,7 @@
 import { Prisma } from '@prisma/client';
 import { CreateBlogRequest } from 'src/blogs/dto/create-blog.dto';
-import { getBlogRequest } from 'src/blogs/dto/get-blog.dto';
+import { DeleteBlogRequest } from 'src/blogs/dto/delete-blog.dto';
+import { GetBlogRequest } from 'src/blogs/dto/get-blog.dto';
 import { UpdateBlogRequest } from 'src/blogs/dto/update-blog.dto';
 
 export class BlogQueryBuilder {
@@ -16,7 +17,7 @@ export class BlogQueryBuilder {
 
   static getBlog({
     blogId,
-  }: getBlogRequest): Prisma.bokdeokbang_blogsFindUniqueArgs {
+  }: GetBlogRequest): Prisma.bokdeokbang_blogsFindUniqueArgs {
     return {
       where: {
         id: blogId,
@@ -33,6 +34,16 @@ export class BlogQueryBuilder {
         id: blogId,
       },
       data,
+    };
+  }
+
+  static deleteBlog({
+    blogId,
+  }: DeleteBlogRequest): Prisma.bokdeokbang_blogsDeleteArgs {
+    return {
+      where: {
+        id: blogId,
+      },
     };
   }
 }
