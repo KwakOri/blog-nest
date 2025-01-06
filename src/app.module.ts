@@ -2,13 +2,15 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import r2Config from './config/r2.config';
-import { R2Service } from './r2/r2.service';
-import { R2Module } from './r2/r2.module';
-import { PrismaModule } from './prisma/prisma.module';
-import { PostsModule } from './posts/posts.module';
 import { BlogsModule } from './blogs/blogs.module';
 import { CategoriesModule } from './categories/categories.module';
+import r2Config from './config/r2.config';
+import { PostsModule } from './posts/posts.module';
+import { PrismaModule } from './prisma/prisma.module';
+import { R2Module } from './r2/r2.module';
+import { R2Service } from './r2/r2.service';
+
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -21,6 +23,7 @@ import { CategoriesModule } from './categories/categories.module';
     PostsModule,
     BlogsModule,
     CategoriesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, R2Service],

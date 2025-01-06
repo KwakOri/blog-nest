@@ -7,7 +7,9 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
+import { AccessTokenGuard } from 'src/auth/guards/jwt.guard';
 import { CategoriesService } from 'src/categories/categories.service';
 import {
   CreateCategoryBody,
@@ -31,6 +33,7 @@ export class CategoriesController {
   }
 
   @Post()
+  @UseGuards(AccessTokenGuard)
   createCategory(
     @Query() query: CreateCategoryQuery,
     @Body() body: CreateCategoryBody,
@@ -39,6 +42,7 @@ export class CategoriesController {
   }
 
   @Put('/:categoryId')
+  @UseGuards(AccessTokenGuard)
   updateCategory(
     @Query() query: UpdateCategoryQuery,
     @Param() param: UpdateCategoryParam,
@@ -52,6 +56,7 @@ export class CategoriesController {
   }
 
   @Delete('/:categoryId')
+  @UseGuards(AccessTokenGuard)
   deleteCategory(@Param() param: DeleteCategoryParam) {
     return this.CategoriesService.deleteCategory(param);
   }
