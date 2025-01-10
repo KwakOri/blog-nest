@@ -11,6 +11,10 @@ async function bootstrap() {
     }),
   );
   app.use(cookieParser());
-  await app.listen(process.env.PORT || 3000, '0.0.0.0');
+  const PORT = Number(process.env.PORT) || 3000;
+  const HOST = process.env.HOST || '0.0.0.0';
+  await app.listen(PORT, HOST, () => {
+    console.log(`App is listening ${HOST}:${PORT}`);
+  });
 }
 bootstrap();
