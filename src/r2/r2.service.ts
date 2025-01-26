@@ -1,12 +1,12 @@
 import {
   GetObjectCommand,
+  HeadObjectCommand,
   PutObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Readable } from 'stream';
-import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class R2Service {
@@ -31,13 +31,38 @@ export class R2Service {
     });
   }
 
-  async uploadFile(
-    folder: string,
-    body: Buffer,
-    mimeType: string,
-  ): Promise<string> {
-    const uuid = uuidv4();
-    const key = `${folder}/${uuid}`;
+  async uploadFile({
+    folder,
+    body,
+    mimeType,
+    fileName,
+  }: {
+    folder?: string;
+    body: Buffer;
+    mimeType: string;
+    fileName: string;
+  }): Promise<string> {
+    const key = `${folder ? folder + '/' : ''}${fileName}`;
+
+    // 먼저 해당 key가 존재하는지 확인
+    const headCommand = new HeadObjectCommand({
+      Bucket: this.bucketName,
+      Key: key,
+    });
+
+    try {
+      // 파일이 이미 존재하면 에러 발생
+      await this.s3Client.send(headCommand);
+      throw new Error('File already exists');
+    } catch (error) {
+      // HeadObjectCommand가 실패하면, 파일이 존재하지 않음
+      if (error.name !== 'NotFound') {
+        console.error('Error checking file existence:', error);
+        throw error;
+      }
+    }
+
+    // 파일이 존재하지 않으면 업로드 진행
     const command = new PutObjectCommand({
       Bucket: this.bucketName,
       Key: key,
@@ -47,7 +72,6 @@ export class R2Service {
 
     try {
       await this.s3Client.send(command);
-
       const publicUrl = `${this.publicUrl}/${key}`;
       console.log(`File uploaded successfully: ${key}`);
       return publicUrl;
