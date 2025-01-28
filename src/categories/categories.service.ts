@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCategoryRequest } from 'src/categories/dto/create-category.dto';
 import { DeleteCategoryRequest } from 'src/categories/dto/delete-category.dto';
-import { GetCategoriesRequest } from 'src/categories/dto/get-categories.dto';
 import { UpdateCategoryRequest } from 'src/categories/dto/update-category.dto';
 import { CategoryQueryBuilder } from 'src/categories/query/categoryQueryBuilder';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -10,10 +9,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class CategoriesService {
   constructor(private prisma: PrismaService) {}
 
-  async getCategories(req: GetCategoriesRequest) {
-    return await this.prisma.bokdeokbang_categories.findMany(
-      CategoryQueryBuilder.getCategories(req),
-    );
+  async getAllCategories() {
+    return await this.prisma.bokdeokbang_categories.findMany();
   }
 
   async createCategory(req: CreateCategoryRequest) {

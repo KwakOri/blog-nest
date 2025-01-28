@@ -16,7 +16,6 @@ import {
   CreateCategoryQuery,
 } from 'src/categories/dto/create-category.dto';
 import { DeleteCategoryParam } from 'src/categories/dto/delete-category.dto';
-import { GetCategoriesQuery } from 'src/categories/dto/get-categories.dto';
 import {
   UpdateCategoryBody,
   UpdateCategoryParam,
@@ -28,8 +27,8 @@ export class CategoriesController {
   constructor(private CategoriesService: CategoriesService) {}
 
   @Get()
-  getCategories(@Query() query: GetCategoriesQuery) {
-    return this.CategoriesService.getCategories(query);
+  getAllCategories() {
+    return this.CategoriesService.getAllCategories();
   }
 
   @Post()

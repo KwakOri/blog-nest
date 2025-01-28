@@ -5,7 +5,7 @@ import { GetCategoriesRequest } from 'src/categories/dto/get-categories.dto';
 import { UpdateCategoryRequest } from 'src/categories/dto/update-category.dto';
 
 export class CategoryQueryBuilder {
-  static getCategories({
+  static getAllCategories({
     blogId,
   }: GetCategoriesRequest): Prisma.bokdeokbang_categoriesFindManyArgs {
     return {

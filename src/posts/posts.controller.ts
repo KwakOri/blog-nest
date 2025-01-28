@@ -35,7 +35,7 @@ export class PostsController {
   }
 
   @Post()
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   async createPost(@Query() query: BlogIdQuery, @Body() body: CreatePostBody) {
     return await this.PostsService.createPost({ ...body, ...query });
   }
