@@ -12,7 +12,6 @@ import {
 import { AccessTokenGuard } from 'src/auth/guards/jwt.guard';
 import { BlogIdQuery } from 'src/dto/blog.dto';
 
-import { CreatePostBody } from 'src/posts/dto/create-post.dto';
 import { DeletePostParam } from 'src/posts/dto/delete-post.dto';
 import { GetPostParam } from 'src/posts/dto/get-post.dto';
 import { GetPostsQuery } from 'src/posts/dto/get-posts.dto';
@@ -36,7 +35,7 @@ export class PostsController {
 
   @Post()
   // @UseGuards(AccessTokenGuard)
-  async createPost(@Query() query: BlogIdQuery, @Body() body: CreatePostBody) {
+  async createPost(@Query() query: BlogIdQuery, @Body() body) {
     return await this.PostsService.createPost({ ...body, ...query });
   }
 

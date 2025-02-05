@@ -1,20 +1,18 @@
 import { IntersectionType } from '@nestjs/mapped-types';
-import { Transform, Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { BlogIdQuery } from 'src/dto/blog.dto';
 
 export class CreatePostBody {
-  @IsString()
-  @IsNotEmpty()
+  // @IsString()
+  // @IsNotEmpty()
   title: string;
 
-  @IsString()
-  @IsNotEmpty()
+  // @IsString()
+  // @IsNotEmpty()
   content: string;
 
-  @Type(() => Number)
-  @Transform(({ value }) => Number(value))
-  @IsNumber()
+  // @Type(() => Number)
+  // @Transform(({ value }) => Number(value))
+  // @IsNumber()
   categoryId?: number;
 }
 

@@ -10,7 +10,17 @@ export class CategoriesService {
   constructor(private prisma: PrismaService) {}
 
   async getAllCategories() {
-    return await this.prisma.bokdeokbang_categories.findMany();
+    const categories = await this.prisma.bokdeokbang_categories.findMany();
+    const blogs = await this.prisma.bokdeokbang_blogs.findMany();
+    return blogs.map((blog) => {
+      return {
+        blogId: blog.id,
+        blogName: blog.name,
+        categories: categories.filter(
+          (category) => category.blogId === blog.id,
+        ),
+      };
+    });
   }
 
   async createCategory(req: CreateCategoryRequest) {

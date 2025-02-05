@@ -1,11 +1,11 @@
-import { IntersectionType } from '@nestjs/mapped-types';
+import { IntersectionType, PartialType } from '@nestjs/mapped-types';
 import { Transform, Type } from 'class-transformer';
 import { IsNumber, IsOptional } from 'class-validator';
 import { BlogIdQuery } from 'src/dto/blog.dto';
 
 export class GetPostsParam {}
 
-export class GetPostsQuery extends BlogIdQuery {
+export class GetPostsQuery extends PartialType(BlogIdQuery) {
   @IsOptional()
   @Type(() => Number)
   @Transform(({ value }) => Number(value))

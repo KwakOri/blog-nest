@@ -23,7 +23,7 @@ export class PostQueryBuilder {
   }: GetPostsQuery): Prisma.bokdeokbang_postsFindManyArgs {
     return {
       where: {
-        blogId,
+        ...(blogId && { blogId }),
         ...(categoryId && { categoryId }),
       },
       ...(cursor && { cursor: { id: cursor }, skip: 1 }),
