@@ -1,7 +1,5 @@
-import { IntersectionType } from '@nestjs/mapped-types';
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber } from 'class-validator';
-import { BlogIdQuery } from 'src/dto/blog.dto';
 
 export class GetPostParam {
   @Type(() => Number)
@@ -10,7 +8,4 @@ export class GetPostParam {
   postId: number;
 }
 
-export class GetPostRequest extends IntersectionType(
-  GetPostParam,
-  BlogIdQuery,
-) {}
+export class GetPostRequest extends GetPostParam {}

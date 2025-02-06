@@ -11,8 +11,8 @@ import {
 } from '@nestjs/common';
 import { AccessTokenGuard } from 'src/auth/guards/jwt.guard';
 import { BlogIdQuery } from 'src/dto/blog.dto';
-
 import { CreatePostBody } from 'src/posts/dto/create-post.dto';
+
 import { DeletePostParam } from 'src/posts/dto/delete-post.dto';
 import { GetPostParam } from 'src/posts/dto/get-post.dto';
 import { GetPostsQuery } from 'src/posts/dto/get-posts.dto';
@@ -29,13 +29,13 @@ export class PostsController {
   }
 
   @Get('/:postId')
-  @UseGuards(AccessTokenGuard)
-  async getPost(@Query() query: BlogIdQuery, @Param() param: GetPostParam) {
-    return await this.PostsService.getPost({ ...query, ...param });
+  // @UseGuards(AccessTokenGuard)
+  async getPost(@Param() param: GetPostParam) {
+    return await this.PostsService.getPost({ ...param });
   }
 
   @Post()
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   async createPost(@Query() query: BlogIdQuery, @Body() body: CreatePostBody) {
     return await this.PostsService.createPost({ ...body, ...query });
   }

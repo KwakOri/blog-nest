@@ -1,6 +1,6 @@
 import { IntersectionType } from '@nestjs/mapped-types';
 import { Transform, Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { BlogIdQuery } from 'src/dto/blog.dto';
 
 export class CreatePostBody {
@@ -16,6 +16,14 @@ export class CreatePostBody {
   @Transform(({ value }) => Number(value))
   @IsNumber()
   categoryId?: number;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  isPublished: boolean;
+
+  @IsString()
+  @IsNotEmpty()
+  imageIds: string;
 }
 
 export class CreatePostRequest extends IntersectionType(
