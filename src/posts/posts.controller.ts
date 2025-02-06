@@ -28,9 +28,9 @@ export class PostsController {
   }
 
   @Get('/:postId')
-  @UseGuards(AccessTokenGuard)
-  async getPost(@Query() query: BlogIdQuery, @Param() param: GetPostParam) {
-    return await this.PostsService.getPost({ ...query, ...param });
+  // @UseGuards(AccessTokenGuard)
+  async getPost(@Param() param: GetPostParam) {
+    return await this.PostsService.getPost({ ...param });
   }
 
   @Post()

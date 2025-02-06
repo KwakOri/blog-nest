@@ -8,10 +8,9 @@ import { UpdatePostRequest } from 'src/posts/dto/update-post.dto';
 export class PostQueryBuilder {
   static getPost({
     postId,
-    blogId,
   }: GetPostRequest): Prisma.bokdeokbang_postsFindUniqueArgs {
     return {
-      where: { id: postId, blogId },
+      where: { id: postId },
     };
   }
 
@@ -22,6 +21,18 @@ export class PostQueryBuilder {
     categoryId,
   }: GetPostsQuery): Prisma.bokdeokbang_postsFindManyArgs {
     return {
+      include: {
+        categories: {
+          select: {
+            name: true,
+          },
+        },
+        blogs: {
+          select: {
+            name: true,
+          },
+        },
+      },
       where: {
         ...(blogId && { blogId }),
         ...(categoryId && { categoryId }),
